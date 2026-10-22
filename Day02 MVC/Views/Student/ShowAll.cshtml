@@ -1,6 +1,11 @@
 ﻿@model List<Student>
 <h1>Students</h1>
 
+<a asp-controller="Student" asp-action="Add" class="btn btn-success mb-3 mt-3">
+	Add Student
+</a>
+
+
 <table class = "table table-hover table-bordered">
 	<tr>
 	    <th>Id</th>
@@ -16,6 +21,8 @@
 		    <td>@item.Name</td>
 		    <td>@item.Age</td>
 		    <td>@item.DepartmentId</td>
+			<td><a href="/Student/Edit/@item.Id">Edit</a></td>
+			<td><a href="/Student/Delete/@item.Id">Delete</a></td>
 		</tr>
 	}
 </table>
