@@ -15,8 +15,10 @@
 <select asp-for="DepartmentId" class="form-control form">
 		@foreach(var dept in Model.Departments)
 		{
-			<option value="@dept.Id">@dept.Name</option>
+			<option value="@dept.Id">@dept.Name</option>           
 		}
+
+
 	</select>
 
 

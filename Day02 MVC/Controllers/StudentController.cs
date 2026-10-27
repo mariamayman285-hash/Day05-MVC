@@ -22,49 +22,7 @@ namespace Day02_MVC.Controllers
             return View("ShowDetails",student);
         }
 
-        //public IActionResult Add()      //the adding page itself
-        //{
-        //    return View("Add");
-        //}
-
-        //public IActionResult Add()
-        //{
-        //    vm.Departments= departmentBL.GetAll()
-        //                                .Select(d=>new Department { Id=d.Id, Name=d.Name })
-        //                                .ToList();
-        //    return View("Add",vm);
-        //}
-
-        //[HttpPost]
-        //public IActionResult SaveAdd(StudentWithDeptListViewModel studentSent)
-        //{
-        //    if (studentSent.Name != null)
-        //    {
-        //        Student student = new Student
-        //        {
-        //            Name = studentSent.Name,
-        //            Age = studentSent.Age,
-        //            DepartmentId = studentSent.DepartmentId
-        //        };
-
-        //        studentBL.AddStudent(student);
-        //        return RedirectToAction("ShowAll");
-        //    }
-
-        //    studentSent.Departments = departmentBL.GetAll();
-        //    return View("Add", studentSent);
-        //}
-
-        //public IActionResult Add(int id)
-        //{
-        //    Student student = studentBL.GetById(id);
-        //    return View("Add", student);
-        //}
-
-        //public ActionResult Add()
-        //{
-        //    return View("Add");
-        //}
+        
 
         [HttpGet]
         public IActionResult Add()
@@ -88,43 +46,7 @@ namespace Day02_MVC.Controllers
             return View("Add", StudentSent);
         }
 
-        //public IActionResult Edit(int id)
-        //{
-        //    return View("Edit",studentBL.GetById(id));
-        //}
-
-        //public IActionResult SaveEdit(Student studentSent , int id)
-        //{
-        //    if (studentSent.Name != null)
-        //    {
-        //        Student oldStudent = studentBL.GetById(id);
-        //        //update to local (controller)
-        //        oldStudent.Name = studentSent.Name;
-        //        oldStudent.Age = studentSent.Age;
-        //        oldStudent.DepartmentId = studentSent.DepartmentId;
-
-        //        //update to DB
-        //        studentBL.EditStudent(oldStudent);
-
-        //        //if saved
-        //        return RedirectToAction(nameof(ShowAll));
-        //    }
-        //    return View("Edit" , studentSent);
-        //}
-
-        //public IActionResult Edit(int id)  //the [age itself
-        //{
-        //    Student stu=studentBL.GetById(id);
-        //    List<Department> departmentList = departmentBL.GetAll();
-
-        //    vm.Id = stu.Id;
-        //    vm.Name = stu.Name;
-        //    vm.Age = stu.Age;
-        //    vm.DepartmentId = stu.DepartmentId;
-        //    vm.Departments = departmentList;
-
-        //    return View("Edit", vm);
-        //}
+        
 
         [HttpGet]
         public IActionResult Edit(int id)
@@ -150,7 +72,8 @@ namespace Day02_MVC.Controllers
         [HttpPost]
         public IActionResult SaveEdit(Student studentSent, int id)
         {
-            if (studentSent.Name != null)
+            //if (studentSent.Name != null)
+            if(ModelState.IsValid)
             {
                 // Get old student
                 Student oldStudent = studentBL.GetById(id);
@@ -165,8 +88,15 @@ namespace Day02_MVC.Controllers
 
                 return RedirectToAction(nameof(ShowAll));
             }
+            StudentWithDeptListViewModel studentVM = new StudentWithDeptListViewModel();
+            studentVM.Id = studentSent.Id;
+            studentVM.Name = studentSent.Name;
+            studentVM.Age = studentSent.Age;
+            studentVM.DepartmentId = studentSent.DepartmentId;
+            studentVM.Departments = departmentBL.GetAll();
 
-            return View("Edit", studentSent);
+            //return View("Edit", studentSent);
+            return View("Edit", studentVM);
         }
 
         public ActionResult Delete(int id)

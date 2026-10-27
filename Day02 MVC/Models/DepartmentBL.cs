@@ -21,5 +21,11 @@ namespace Day02_MVC.Models
             context.Departments.Add(NewDeptData);
             context.SaveChanges();
         }
+
+        public void EditDept(Department oldDeptData)
+        {
+            context.Departments.Update(oldDeptData);
+            context.SaveChanges();
+        }
     }
 }

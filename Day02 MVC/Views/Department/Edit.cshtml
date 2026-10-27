@@ -1,0 +1,25 @@
+﻿@model Department
+@{
+	ViewData["Title"] = "Edit Page";
+}
+
+<form method="post" asp-action="SaveEdit" asp-controller="Department" asp-route-id="@Model.Id" >
+
+	<div>
+        <label asp-for="Name">Department Name</label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div>
+        <label asp-for="MgrName">Manager Name</label>
+        <input asp-for="MgrName" class="form-control" />
+        <span asp-validation-for="MgrName" class="text-danger"></span>
+    </div>
+
+
+    <input type="submit" value="Save Department Changes" class="btn btn-success mt-3" />
+
+</form>
+
+<a asp-action="index" asp-controller="Department"> Back To List</a>

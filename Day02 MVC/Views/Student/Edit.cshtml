@@ -2,16 +2,18 @@
 
 <h1>Edit</h1>
 
-<form method="post" action="/Student/SaveEdit/@Model.Id">
+<form method="post" asp-action="SaveEdit" asp-controller="Student" asp-route-id="@Model.Id">
 
     <div>
         <label asp-for="Name">Student Name</label>
         <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
 
     <div>
         <label asp-for="Age">Student Age</label>
         <input asp-for="Age" class="form-control" />
+         <span asp-validation-for="Age" class="text-danger"></span>
     </div>
 
     <div>
@@ -29,6 +31,11 @@
                 }
             }
         </select>
+        @* <select asp-for="DepartmentId" class="form-control" asp-items="@(new SelectList(Model.Departments, "Id", "Name"))">
+        <option value="0">-- Select Department --</option>
+        </select>
+
+        <span asp-validation-for="DepartmentId" class="text-danger"></span> *@
     </div>
 
     <input type="submit" value="Save Changes" class="btn btn-success mt-3" />

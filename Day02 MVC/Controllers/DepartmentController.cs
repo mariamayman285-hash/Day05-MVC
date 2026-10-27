@@ -62,5 +62,35 @@ namespace Day02_MVC.Controllers
 
             return View("DetailsVM" , viewModel);
         }
+
+
+        public IActionResult Edit(int id)
+        {
+            Department dept = departmentBL.GetById(id);
+
+            if(dept != null)
+            {
+                return View("Edit" , dept);     //the edit page with the old values of the chosen department
+            }
+            return NotFound();
+        }
+
+        public IActionResult SaveEdit(Department deptSent)
+        {
+            //if (deptSent.Name != null)
+            if(ModelState.IsValid)
+            {
+                Department newDept = departmentBL.GetById(deptSent.Id);
+
+                newDept.Name = deptSent.Name;
+                newDept.MgrName = deptSent.MgrName;
+
+                departmentBL.EditDept(newDept);
+
+                return RedirectToAction("Index");
+
+            }
+            return View("Edit" , deptSent);
+        }
     }
 }
